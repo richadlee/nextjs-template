@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useSignal, initData, postEvent } from '@telegram-apps/sdk-react';
+import { useSignal, initData, postEvent, expandViewport  } from '@telegram-apps/sdk-react';
 import { Button, Placeholder, Cell, Section } from '@telegram-apps/telegram-ui';
 import { MaskEditor } from '@/components/MaskEditor/MaskEditor';
 import { Page } from '@/components/Page';
@@ -101,6 +101,7 @@ export default function MaskEditorPage() {
     }
 
     init();
+    expandViewport();
   }, [searchParams, initDataState?.user?.id]);
 
   const handleSubmit = async () => {
