@@ -1,0 +1,122 @@
+.container {
+  width: 100%;
+  max-width: 100vw;
+  padding: 16px;
+  padding-bottom: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.canvasContainer {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  object-fit: contain;
+}
+
+.controls {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  max-width: 100vw;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.controls input[type="range"] {
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.colorPicker {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 2px 0;
+  padding: 4px;
+}
+
+.colorButton {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  max-width: 28px;
+  max-height: 28px;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  outline: none;
+  flex-shrink: 0;
+  flex-grow: 0;
+  transition: transform 0.2s ease;
+}
+
+.colorButton:hover {
+  transform: scale(1.1);
+}
+
+.colorButton.active {
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px #000;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.buttonGroup button {
+  flex: 1;
+  padding: 6px 12px;
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.buttonGroup button:first-child,
+.buttonGroup button:nth-child(2) {
+  flex: 0.8;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .controls button {
+    min-height: 44px;
+  }
+  
+  .controls input[type="range"] {
+    height: 32px;
+  }
+} 
