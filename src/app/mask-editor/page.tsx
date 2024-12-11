@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useSignal, initData, postEvent } from '@telegram-apps/sdk-react';
-import { Button, Placeholder } from '@telegram-apps/telegram-ui';
+import { Button, Placeholder, Cell, Section } from '@telegram-apps/telegram-ui';
 import { MaskEditor } from '@/components/MaskEditor/MaskEditor';
 import { Page } from '@/components/Page';
 
@@ -178,36 +178,36 @@ export default function MaskEditorPage() {
   }
 
   return (
-    <Page
-    back={false}
-    >
+    <Page back={false}>
+      {decryptedData && (
+        <Section>
+          <Cell
+            before={<span style={{ fontSize: '20px' }}>👤</span>}
+            multiline
+            description={`PhotoType: ${decryptedData.photo_type} - ${decryptedData.image_cost_credits} CR`}
+          >
+            User ID: {decryptedData.user_id}
+          </Cell>
+        </Section>
+      )}
+      
       <MaskEditor
         imageUrl={imageUrl}
         onChange={(base64) => {
           setMaskBase64(base64);
         }}
       />
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        padding: '16px',
-        paddingBottom: '32px',
-        width: '100%',
-        boxSizing: 'border-box'
-      }}>
-        <Button 
+      
+      <div style={{ padding: '16px', paddingBottom: '32px' }}>
+        <Button
+          size="l"
           onClick={handleSubmit}
-          style={{ 
-            width: '200px',
-            backgroundColor: '#ff4d4f',
-            color: '#ffffff',
-            border: 'none',
-            boxShadow: '0 2px 0 rgba(0, 0, 0, 0.045)'
-          }}
+          style={{ width: '100%' }}
         >
-          📤 Submit
+          📤 Submit Mask
         </Button>
       </div>
+
       {submitting && (
         <div style={{
           position: 'fixed',
@@ -215,48 +215,36 @@ export default function MaskEditorPage() {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          backgroundColor: 'var(--tg-theme-bg-color)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           zIndex: 1000
         }}>
-          <div style={{
-            backgroundColor: 'var(--tg-theme-bg-color)',
-            padding: '20px',
-            borderRadius: '8px',
-            textAlign: 'center',
-            minWidth: '300px',
-            color: 'var(--tg-theme-text-color)',
-            border: '1px solid var(--tg-theme-hint-color)'
-          }}>
+          <Section style={{ width: '90%', maxWidth: '400px' }}>
             {submitError ? (
               <>
-                <div style={{ 
-                  color: '#ff4d4f',
-                  marginBottom: '16px',
-                  wordBreak: 'break-word'
-                }}>
-                  ❌ {submitError}
-                </div>
-                <Button 
-                  onClick={closeModal}
-                  style={{ 
-                    minWidth: '100px',
-                    backgroundColor: 'var(--tg-theme-button-color)',
-                    color: 'var(--tg-theme-button-text-color)',
-                  }}
+                <Cell
+                  before={<span style={{ fontSize: '20px' }}>❌</span>}
+                  multiline
                 >
-                  Close
-                </Button>
+                  {submitError}
+                </Cell>
+                <div style={{ padding: '16px', textAlign: 'center' }}>
+                  <Button onClick={closeModal}>
+                    Close
+                  </Button>
+                </div>
               </>
             ) : (
-              <>
-                <div style={{ marginBottom: '10px', color: 'var(--tg-theme-text-color)' }}>⏳ Processing...</div>
-                <div style={{ color: 'var(--tg-theme-text-color)' }}>Please wait while we submit your mask</div>
-              </>
+              <Cell
+                before={<span style={{ fontSize: '20px' }}>⏳</span>}
+                description="Please wait while we submit your mask"
+              >
+                Processing...
+              </Cell>
             )}
-          </div>
+          </Section>
         </div>
       )}
     </Page>
