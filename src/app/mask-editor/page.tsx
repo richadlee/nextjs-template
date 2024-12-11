@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useSignal, initData, sendData } from '@telegram-apps/sdk-react';
+import { useSignal, initData, postEvent } from '@telegram-apps/sdk-react';
 import { Button, Placeholder } from '@telegram-apps/telegram-ui';
 import { MaskEditor } from '@/components/MaskEditor/MaskEditor';
 import { Page } from '@/components/Page';
@@ -143,7 +143,7 @@ export default function MaskEditorPage() {
 
       if (result.success) {
         setSubmitting(false);
-        sendData('close');
+        postEvent('web_app_close');
       } else {
         setSubmitError(result.error || 'Failed to submit mask');
       }
