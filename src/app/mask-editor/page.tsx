@@ -160,7 +160,7 @@ export default function MaskEditorPage() {
 
   if (loading) {
     return (
-      <Page>
+      <Page back={false}>
         <Placeholder header="Loading" description="Please wait..." />
       </Page>
     );
@@ -168,7 +168,7 @@ export default function MaskEditorPage() {
 
   if (error) {
     return (
-      <Page>
+      <Page back={false}>
         <Placeholder
           header="Error"
           description={error}
@@ -178,7 +178,9 @@ export default function MaskEditorPage() {
   }
 
   return (
-    <Page>
+    <Page
+    back={false}
+    >
       <MaskEditor
         imageUrl={imageUrl}
         onChange={(base64) => {
