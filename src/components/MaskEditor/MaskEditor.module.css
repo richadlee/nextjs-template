@@ -31,13 +31,13 @@
 }
 
 .controls {
-  margin-top: 8px;
+  margin-top: 6px;
   display: flex;
   flex-direction: column;
   gap: 4px;
   width: 100%;
   max-width: 100vw;
-  padding: 0 16px;
+  padding: 0 12px;
   box-sizing: border-box;
 }
 
@@ -88,14 +88,14 @@
 
 .buttonGroup {
   display: flex;
-  gap: 8px;
+  gap: 14px;
   margin-top: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .buttonGroup button {
   flex: 1;
-  padding: 6px 12px;
+  padding: 12px 12px;
   background: var(--tg-theme-button-color);
   color: var(--tg-theme-button-text-color);
   border: none;
@@ -108,7 +108,7 @@
 .buttonGroup button:nth-child(2) {
   flex: 0.8;
   font-size: 12px;
-  padding: 4px 8px;
+  padding: 8px 8px;
 }
 
 @media (hover: none) and (pointer: coarse) {

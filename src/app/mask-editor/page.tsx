@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useSignal, initData, postEvent, expandViewport  } from '@telegram-apps/sdk-react';
-import { Button, Placeholder, Cell, Section } from '@telegram-apps/telegram-ui';
+import { Button, Placeholder, Cell, Section, Accordion, Blockquote } from '@telegram-apps/telegram-ui';
 import { MaskEditor } from '@/components/MaskEditor/MaskEditor';
 import { Page } from '@/components/Page';
+import { doc } from './doc';
 
 interface DecryptedData {
   bot_token: string;
@@ -28,6 +29,7 @@ export default function MaskEditorPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const token = searchParams.get('token');
@@ -194,7 +196,29 @@ export default function MaskEditorPage() {
           </Cell>
         </Section>
       )}
-      
+
+    <Accordion
+      expanded={expanded}
+      onChange={(isExpanded) => setExpanded(isExpanded)}
+      id=""
+    > 
+      <Accordion.Summary>
+      💡 Usage Tips
+      </Accordion.Summary>
+      <Accordion.Content>
+        <div
+          style={{
+            padding: '10px 20px 20px'
+          }}
+        >
+          <p style={{fontSize: '14px'}}>
+          {decryptedData?.photo_type && doc.en.tips[decryptedData.photo_type]?.text}
+          </p>
+          <p style={{fontSize: '14px'}}>{doc.en.tips.title}</p>
+        </div>
+      </Accordion.Content>
+    </Accordion>
+          
       <MaskEditor
         imageUrl={imageUrl}
         onChange={(base64) => {

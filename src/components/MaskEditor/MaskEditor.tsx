@@ -296,7 +296,7 @@ export const MaskEditor = forwardRef<MaskEditorRef, MaskEditorProps>(
       </div>
       <div className={styles.controls}>
         <div>
-          <label>Brush Size: {brushSize}</label>
+          <label className="text-xs">🖌︎Brush Size: {brushSize}</label>
           <input
             type="range"
             min="1"
@@ -306,7 +306,7 @@ export const MaskEditor = forwardRef<MaskEditorRef, MaskEditorProps>(
           />
         </div>
         <div>
-          <label>Opacity: {Math.round(opacity * 100)}%</label>
+          <label className="text-sm">⬒Opacity: {Math.round(opacity * 100)}%</label>
           <input
             type="range"
             min="0"
