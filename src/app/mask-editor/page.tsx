@@ -31,6 +31,7 @@ export default function MaskEditorPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
 
+
   useEffect(() => {
     const token = searchParams.get('token');
     const userId = initDataState?.user?.id;
@@ -212,9 +213,14 @@ export default function MaskEditorPage() {
           }}
         >
           <p style={{fontSize: '14px'}}>
-          {decryptedData?.photo_type && doc.en.tips[decryptedData.photo_type]?.text}
+            {decryptedData?.photo_type && 
+            Object.hasOwn(doc.en.tips, decryptedData.photo_type) ? 
+            doc.en.tips[decryptedData.photo_type as keyof typeof doc.en.tips] : 
+            ''}
           </p>
-          <p style={{fontSize: '14px'}}>{doc.en.tips.title}</p>
+          <p style={{fontSize: '14px'}}>
+            {doc.en.tips.title}
+          </p>
         </div>
       </Accordion.Content>
     </Accordion>
