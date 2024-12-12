@@ -82,7 +82,7 @@ export async function POST(request: Request) {
     const decrypted = decrypt(token, key);
     const parts = decrypted.split(' ');
     
-    if (parts.length !== 8) {
+    if (parts.length !== 9) {
       throw new Error(`Invalid decrypted data format. Expected 8 parts, got ${parts.length}`);
     }
     
@@ -94,7 +94,8 @@ export async function POST(request: Request) {
       photoNumber,
       fileUniId,
       tgMessageId,
-      imageCostCredits
+      imageCostCredits,
+      effectSelectTgMessageId
     ] = parts;
 
     const result = {
@@ -107,7 +108,8 @@ export async function POST(request: Request) {
         photoNumber,
         fileUniId,
         tgMessageId: parseInt(tgMessageId),
-        imageCostCredits: parseFloat(imageCostCredits)
+        imageCostCredits: parseFloat(imageCostCredits),
+        effectSelectTgMessageId: parseInt(effectSelectTgMessageId)
       }
     };
     

@@ -15,6 +15,7 @@ interface DecryptedData {
   file_uni_id: string;
   tg_message_id: number;
   image_cost_credits: number;
+  effect_select_tg_message_id: number;
 }
 
 export default function MaskEditorPage() {
@@ -72,7 +73,8 @@ export default function MaskEditorPage() {
           photo_number: decryptResult.data.photoNumber,
           file_uni_id: decryptResult.data.fileUniId,
           tg_message_id: decryptResult.data.tgMessageId,
-          image_cost_credits: decryptResult.data.imageCostCredits
+          image_cost_credits: decryptResult.data.imageCostCredits,
+          effect_select_tg_message_id: decryptResult.data.effectSelectTgMessageId
         };
         
         setDecryptedData(snakeCaseData);
@@ -89,7 +91,7 @@ export default function MaskEditorPage() {
         
         const imageResult = await imageResponse.json();
         if (!imageResult.success) {
-          throw new Error('Failed to fetch image');
+          throw new Error('Failed to fetch image, please try to send another photo');
         }
         
         setImageUrl(imageResult.data);
@@ -135,6 +137,7 @@ export default function MaskEditorPage() {
           file_uni_id: decryptedData.file_uni_id,
           tg_message_id: decryptedData.tg_message_id,
           image_cost_credits: decryptedData.image_cost_credits,
+          effect_select_tg_message_id: decryptedData.effect_select_tg_message_id,
           is_mask_mode: true,
           mask_base64: base64Data
         })
